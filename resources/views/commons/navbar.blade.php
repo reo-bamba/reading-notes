@@ -10,7 +10,7 @@
         <div class = "collapse navbar-collapse" id = "nav-bar">
             <ul class = "navbar-nav">
                 {{-- ユーザー登録 --}}
-                <li>ユーザー登録</li>
+                <li>{!! link_to_route('signup.get', 'Signup', [], ['class' => 'nav-link']) !!}</li>
                 
                 {{-- ユーザーログイン --}}
                 <li>ログイン</li>

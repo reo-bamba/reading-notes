@@ -70,4 +70,17 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+    
+    protected function image(Request $request, User $user)
+    {
+        $originalImg = $request->user_image;
+        
+        if($originalImg->isvalid()) {
+            $filePath = $originalImg->store('public');
+            $user->image = str_replace('public/', '', $filepath);
+            $user->save();
+            
+            return redirect("/user/{$user->id}")->with('user', $user);
+        }
+    }
 }

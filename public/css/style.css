@@ -1,4 +1,4 @@
-heading06{
+h1{
     position:relative;
     margin:0 22px 0 10px;
     padding:14px 15px 0px 20px;
@@ -11,19 +11,19 @@ heading06{
         1px 15px 4px -3px rgba(0,0,0,0.2);
 }
 
-heading06:before{
+h1:before{
     content:" ";
     position:absolute;
     top:100%;
     left:100%;
-    width:0;
+    width: 0;
     height:0;
     border-width:12px 12px 0 0;
     border-style:solid;
     border-color:transparent;
     border-top-color:#cc9;
 }
-heading06:after{
+h1:after{
     content:" ";
     position:absolute;
     padding:0 20px;
