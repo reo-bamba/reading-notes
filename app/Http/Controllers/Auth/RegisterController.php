@@ -67,20 +67,11 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'profile_image' => $data['profile_image'],
             'password' => Hash::make($data['password']),
         ]);
     }
     
-    protected function image(Request $request, User $user)
-    {
-        $originalImg = $request->user_image;
-        
-        if($originalImg->isvalid()) {
-            $filePath = $originalImg->store('public');
-            $user->image = str_replace('public/', '', $filepath);
-            $user->save();
-            
-            return redirect("/user/{$user->id}")->with('user', $user);
-        }
-    }
+    
+    
 }
