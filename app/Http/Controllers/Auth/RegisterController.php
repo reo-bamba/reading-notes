@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -53,6 +54,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'profile_image' => ['file', 'mimes:jpeg, png, jpg, bmb', 'max:2048']
         ]);
     }
 
@@ -62,16 +64,27 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'profile_image' => $data['profile_image'],
-            'password' => Hash::make($data['password']),
-        ]);
+       if($file = $request->profile_image)
+       {
+           $fileName = time().'.'.$file->getClientOriginalExtension();
+           
+           $target_path = public_path('/profile/');
+           $file->move($target_path, $fileName);
+       }
+       else
+       {
+           $name = "";
+       }
+       
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'profile_image' => $fileName,
+            ]);
+        return redirect('/');
     }
-    
-    
-    
+   
 }

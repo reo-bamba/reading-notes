@@ -37,3 +37,33 @@ h1:after{
     -o-transform: rotate(-1deg);
     transform: rotate(-1deg);
 }
+div.card-body{
+    margin-left:0px;
+}
+#wrapper {
+    width:80%;
+    margin: 30px;
+}
+#main {
+    display : flex;
+    justify-content: space-around;
+}
+#main1 {
+     display: inline-block;
+    width: 60%; 
+    background-color: #fab9a8;
+    text-align: left;
+    padding: 5px;
+}
+#header {
+    display: flex;
+}
+#title {
+    display: inline;
+    background-color: #adff2f;
+    margin: 20px 0px 20px 200px;
+}
+#title1 {
+    display: inline;
+    background-color: #f0f8ff;
+}
