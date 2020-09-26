@@ -7,7 +7,7 @@
                 <div class = "card" id ="wrapper">
                     <div class = "card-header" id ="header">
                     @if($note->user->profile_image)
-                        <img src="/profile/{{ $note->user->profile_image }}" width="60px" height="60px">
+                        <img src="{{ $note->user->profile_image }}" width="60px" height="60px">
                     @else
                         <img class="mr-2 rounded" src="{{ Gravatar::get($note->user->email, ['size' => 50]) }}" alt="">
                     @endif
@@ -28,7 +28,7 @@
                         
                     </div>
                 <div class = "card-body" id = "main">
-                    <img src = "/uproads/{{ $note->book_image }}" alt = "non image" width="150px" height="150px">
+                    <img src = "{{ $note->book_image }}" alt = "non image" width="150px" height="150px">
                     {{-- title, image, rate, Like --}}
                     <div id = "main1">
                         <h3>タイトル : {!! link_to_route('notes.show', $note->title, ['note' => $note->id]) !!}</h3>

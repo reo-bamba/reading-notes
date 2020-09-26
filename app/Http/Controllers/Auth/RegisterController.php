@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -66,23 +68,30 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
-       if($file = $request->profile_image)
-       {
-           $fileName = time().'.'.$file->getClientOriginalExtension();
+        //ストレージの保存
+       //if($file = $request->profile_image){
+           //$fileName = time().'.'.$file->getClientOriginalExtension();
            
-           $target_path = public_path('/profile/');
-           $file->move($target_path, $fileName);
-       }
-       else
-       {
-           $name = "";
-       }
+           //$target_path = public_path('/profile/');
+           //$file->move($target_path, $fileName);
+        //}else{
+        //   $name = "";
+       //}
+       //S3に保存
+       $user = new User;
+       $image = $request->file('profile_image');
+       
+       $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+       
+       $user->profile_image = Storage::disk('s3')->url($path);
+       //$user->save();
+       
        
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'profile_image' => $fileName,
+            'profile_image' => $user->profile_image,
             ]);
         return redirect('/');
     }

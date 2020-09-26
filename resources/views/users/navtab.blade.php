@@ -5,7 +5,7 @@
                     <h2>プロフィール</h2>
                 </div>
                 <div class = "card-body" id ="header">
-                    <img src = "/profile/{{ $user->profile_image }}" alt = "non image" width="160px" height="160px">
+                    <img src = "{{ $user->profile_image }}" alt = "non image" width="160px" height="160px">
                     <h2 class = "card-title">{{ $user->name }}</h2>
                 </div>
             </div>  

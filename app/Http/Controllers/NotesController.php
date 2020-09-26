@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Note;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 class NotesController extends Controller
 {
     public function index()
@@ -31,22 +34,26 @@ class NotesController extends Controller
             'rate' => 'required|max:100',
             ]);
             
-        if($file = $request->book_image)
-        {
+        //if($file = $request->book_image){
             //保存ファイルに名前をつける
-            $fileName = time().'.'.$file->getClientOriginalExtension();
+            //$fileName = time().'.'.$file->getClientOriginalExtension();
             //Laravel直下のpublicディレクトリに新フォルダをつくり保存する
-            $target_path = public_path('/uproads/');
-            $file->move($target_path, $fileName);
-        }
-        else
-        {
+            //$target_path = public_path('/uproads/');
+            //$file->move($target_path, $fileName);
+        //}else{
             //画像が登録されなかった時はから文字をいれる
-            $name = "";
-        }
+            //$name = "";
+        //}
+        //S3に保存
+        $note = new Note;
+        $image = $request->file('book_image');
+        
+        $path = Storage::disk('s3')->putFile('books', $image, 'public');
+        
+        $note->book_image = Storage::disk('s3')->url($path);
         
         $request->user()->notes()->create([
-            'book_image' => $fileName,
+            'book_image' => $note->book_image,
             'title' => $request->title,
             'summary' => $request->summary,
             'thoughts' => $request->thoughts,
@@ -96,27 +103,30 @@ class NotesController extends Controller
     
     public function update(Request $request, $id)
     {
-        if($file = $request->book_image)
-        {
+        //if($file = $request->book_image){
             //保存ファイルに名前をつける
-            $fileName = time().'.'.$file->getClientOriginalExtension();
+            //$fileName = time().'.'.$file->getClientOriginalExtension();
             //Laravel直下のpublicディレクトリに新フォルダをつくり保存する
-            $target_path = public_path('/uproads/');
-            $file->move($target_path, $fileName);
-        }
-        else
-        {
+            //$target_path = public_path('/uproads/');
+            //$file->move($target_path, $fileName);
+        //}else{
             //画像が登録されなかった時はから文字をいれる
-            $name = "";
-        }
+            //$name = "";}
+            //s3に保存
+            $note = Note::findOrFail($id);
+            //$note = new Note;
+            $image = $request->file('book_image');
+            
+            $path = Storage::disk('s3')->putFile('UDbooks', $image, 'public');
+            
+            //$note->book_image = Storage::disk('s3')->url('$path');
         
-        $note = Note::findOrFail($id);
-        $note->book_image = $fileName;
+        //$note = Note::findOrFail($id);
+        $note->book_image = Storage::disk('s3')->url($path);
         $note->title = $request->title;
         $note->rate = $request->rate;
         $note->summary = $request->summary;
         $note->thoughts = $request->thoughts;
-        
         $note->save();
         
         return redirect('/');

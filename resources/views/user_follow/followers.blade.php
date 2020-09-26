@@ -9,7 +9,7 @@
         @foreach ($followers as $follower)
             <li class="media">
                 @if($follower->profile_image)
-                <img src="/profile/{{ $follower->profile_image }}"  width="60px" height="60px">
+                <img src="{{ $follower->profile_image }}"  width="60px" height="60px">
                 @else
                 <img class="mr-2 rounded" src="{{ Gravatar::get($follower->email, ['size' => 50]) }}" alt="">
                 @endif

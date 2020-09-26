@@ -5,7 +5,7 @@
 <div class = "card">
     <div class = "card-header" id = "header">
         @if($note->user->profile_image)
-            <img src="/profile/{{ $note->user->profile_image }}" width="60px" height="60px">
+            <img src="{{ $note->user->profile_image }}" width="60px" height="60px">
         @else
             <img class="mr-2 rounded" src="{{ Gravatar::get($note->user->email, ['size' => 50]) }}" alt="">
         @endif
@@ -30,7 +30,8 @@
     <div class = "row">
         <div class = "card">
             <h2 class = "card-header">{{ $note->title }}</h2>
-            <img  src = "/uproads/{{ $note->book_image }}" alt = "non image" style ="width: 18rem; height: 250px;">
+{{ dd($note->book_image) }}
+            <img  src = "{{ $note->book_image }}" alt = "non image" style ="width: 18rem; height: 250px;">
         </div>
     </div>
     </div>
