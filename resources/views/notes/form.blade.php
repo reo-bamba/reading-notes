@@ -20,7 +20,7 @@
             </div>
             <div class = "form-group">
                 {!! Form::label('rate', '＜評価点 : ') !!}
-                {!! Form::selectRange('rate', 0, 100, 'null', ['class' => 'form-controll', 'range']) !!}＞
+                {!! Form::selectRange('rate', 0, 100, 'null' , ['class' => 'form-controll', 'range']) !!}＞
             </div>
             <div calss = "form-group">
                 {!! Form::label('summary', '＜あらすじ＞') !!}

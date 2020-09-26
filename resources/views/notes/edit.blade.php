@@ -9,7 +9,7 @@
         <div class = "col-sm-6 offset-sm-6">
             <div class = "form-group">
                 {!! Form::label('book_image', '＜本の画像を選択＞',) !!}
-                {!! Form::file('book_image', ['class' => 'field']) !!}
+                {!! Form::file('book_image', old('book_image'), ['class' => 'field']) !!}
             </div>     
 
             <div class = "form group">
@@ -18,7 +18,7 @@
             </div>
             <div class = "form-group">
                 {!! Form::label('rate', '＜評価点 : ') !!}
-                {!! Form::selectRange('rate', 0, 100, 'null', ['class' => 'form-controll', 'range']) !!}＞
+                {!! Form::selectRange('rate', 0, 100, old('rate'), ['class' => 'form-controll', 'range']) !!}＞
             </div>
             <div calss = "form-group">
                 {!! Form::label('summary', '＜あらすじ＞') !!}

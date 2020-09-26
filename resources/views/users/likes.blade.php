@@ -5,7 +5,8 @@
     @include('users.navtab')
     
     <div class = "col-sm-8">
-        @include('notes.notes', ['notes' => $likes])
+        @include('notes.display', ['notes' => $likes])
+
     </div>
     
 @endsection
