@@ -1,3 +1,4 @@
+@if(Auth::check())
 @if (Auth::id() != $user->id)
     @if (Auth::user()->is_following($user->id))
         {{-- アンフォローボタンのフォーム --}}
@@ -10,4 +11,5 @@
             {!! Form::submit('フォローする', ['class' => "btn btn-primary btn-block"]) !!}
         {!! Form::close() !!}
     @endif
+@endif
 @endif

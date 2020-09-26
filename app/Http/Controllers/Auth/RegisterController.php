@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'profile_image' => ['file', 'mimes:jpeg, png, jpg, bmb', 'max:2048']
+            'profile_image' => ['required', 'file', 'mimes:jpeg, png, jpg, bmb', 'max:2048']
         ]);
     }
 
@@ -68,16 +68,14 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
-        //ストレージの保存
-       //if($file = $request->profile_image){
-           //$fileName = time().'.'.$file->getClientOriginalExtension();
-           
-           //$target_path = public_path('/profile/');
-           //$file->move($target_path, $fileName);
-        //}else{
-        //   $name = "";
-       //}
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'profile_image' => ['required', 'file', 'mimes:jpeg, png, jpg, bmb', 'max:2048']
+        ]);
        //S3に保存
+       if($request->profile_image) {
        $user = new User;
        $image = $request->file('profile_image');
        
@@ -85,6 +83,7 @@ class RegisterController extends Controller
        
        $user->profile_image = Storage::disk('s3')->url($path);
        //$user->save();
+       }
        
        
         User::create([
@@ -93,7 +92,8 @@ class RegisterController extends Controller
             'password' => Hash::make($request['password']),
             'profile_image' => $user->profile_image,
             ]);
-        return redirect('/');
+            
+        return redirect('/')->with('message', '登録が完了しました。Loginをしましょう。');
     }
    
 }

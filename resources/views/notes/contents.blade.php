@@ -30,7 +30,7 @@
     <div class = "row">
         <div class = "card">
             <h2 class = "card-header">{{ $note->title }}</h2>
-{{ dd($note->book_image) }}
+
             <img  src = "{{ $note->book_image }}" alt = "non image" style ="width: 18rem; height: 250px;">
         </div>
     </div>
