@@ -15,7 +15,7 @@
                 @endif
                 <div class="media-body">
                     <div>
-                        {{ $user->name }}
+                        {{ $follower->name }}
                     </div>
                     <div>
                         {{-- ユーザ詳細ページへのリンク --}}

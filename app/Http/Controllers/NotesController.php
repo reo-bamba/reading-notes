@@ -27,7 +27,7 @@ class NotesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'book_image' => 'file|mimes:jpeg,png,jpg,bmb|max:2048',
+            'book_image' => 'required|file|mimes:jpeg,png,jpg,bmb|max:2048',
             'title' => 'required|max:255',
             'summary' => 'required|max:255',
             'thoughts' => 'required|max:255',
@@ -71,7 +71,7 @@ class NotesController extends Controller
         {
             $note->delete();
         }
-        return back();
+        return redirect('/');
     }
     
     public function create()
@@ -103,6 +103,13 @@ class NotesController extends Controller
     
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'book_image' => 'required|file|mimes:jpeg,png,jpg,bmb|max:2048',
+            'title' => 'required|max:255',
+            'summary' => 'required|max:255',
+            'thoughts' => 'required|max:255',
+            'rate' => 'required|max:100',
+            ]);
         //if($file = $request->book_image){
             //保存ファイルに名前をつける
             //$fileName = time().'.'.$file->getClientOriginalExtension();

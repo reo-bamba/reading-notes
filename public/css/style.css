@@ -82,3 +82,18 @@ div.card-body{
     width:50%;
     margin-top: 30px;
 }
+html, body {
+    height: 100%;
+    margin:0;
+}
+.footer,
+.push {
+  height: 50px;
+}
+.container {
+    min-height: 100%;
+ 
+  /* フッタの高さと等しいネガティブマージン */
+  /* また最後の子要素の潜在的なマージンとしても機能 */
+  margin-bottom: -50px;
+}
