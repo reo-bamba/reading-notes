@@ -3,7 +3,7 @@
         @foreach ($users as $user)
             <li class="media">
                 @if($user->profile_image)
-                <img src="{{ $user->profile_image }}" width="200px" height="200px">
+                <img src="{{ $user->profile_image }}" width="100px" height="100px">
                 @else
                 <img class="mr-2 rounded" src="{{ Gravatar::get($user->email, ['size' => 50]) }}" alt="">
                 @endif
