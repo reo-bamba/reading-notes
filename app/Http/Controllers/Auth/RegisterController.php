@@ -66,34 +66,27 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(Request $request)
+    protected function create(array $data)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'profile_image' => ['required', 'file', 'mimes:jpeg, png, jpg, bmb', 'max:2048']
-        ]);
+      
        //S3に保存
-       if($request->profile_image) {
        $user = new User;
-       $image = $request->file('profile_image');
+       $image = $data['profile_image'];
        
        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
        
        $user->profile_image = Storage::disk('s3')->url($path);
        //$user->save();
-       }
+     
        
-       
-        User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
             'profile_image' => $user->profile_image,
             ]);
             
-        return redirect('/')->with('message', '登録が完了しました。Loginをしましょう。');
+   
     }
    
 }
