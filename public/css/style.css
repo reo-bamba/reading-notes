@@ -70,12 +70,12 @@ div.card-body{
 
 #wrapper1 {
     display: flex;
-    width: 80%;
+    /*width: 95%; */
     justify-content: space-between;
     margin: 30px 0 70px 0;
 }
 #main2 {
-    width:40%;
+    width:45%;
     margin-top: 50px;
 }
 #aside {

@@ -8,8 +8,8 @@
         {!! Form::model($note, ['route' => ['notes.update', $note->id], 'enctype' => 'multipart/form-data', 'method' => 'put']) !!}
         <div class = "col-sm-6 offset-sm-6">
             <div class = "form-group">
-                {!! Form::label('book_image', '＜本の画像を選択＞',) !!}
-                {!! Form::file('book_image', old('book_image'), ['class' => 'field']) !!}
+                {!! Form::label('book_image', '＜本の画像を選択＞') !!}<br/>
+                {!! Form::file('book_image', old('book_image'), ['class' => 'form-control', 'field']) !!}
             </div>     
 
             <div class = "form group">
@@ -31,7 +31,7 @@
             </div>
             <div class = "form-group">
             {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}
-            </div>
+            </div><br/><br/>
         </div>
         {!! Form::close() !!}
     </div>

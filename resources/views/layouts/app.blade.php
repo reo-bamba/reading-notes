@@ -18,7 +18,7 @@
             
             {{-- content --}}
             @yield('content')
-        </div>
+        </div><br/><br/>
         {{-- footer --}}
         @include('commons.footer')
         

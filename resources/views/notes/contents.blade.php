@@ -29,9 +29,9 @@
     <div id="main2">
     <div class = "row">
         <div class = "card">
-            <h2 class = "card-header">{{ $note->title }}</h2>
+            <h2 class = "card-header">{!! nl2br(e($note->title)) !!}</h2>
 
-            <img  src = "{{ $note->book_image }}" alt = "non image" style ="width: 18rem; height: 250px;">
+            <img  src = "{{ $note->book_image }}" alt = "non image">
         </div>
     </div>
     </div>
@@ -40,12 +40,12 @@
     @include('notes.like_button')<br/>
         <h3 id ="title1">評価点 : {{ $note->rate }}</h3>
         
-        <div class="card text-center border-info  mb-3" style="max-width: 40rem; margin-top: 30px;">
+        <div class="card text-center border-info  mb-3">
             <div class = "card-header">あらすじ</div>
-            <p class = "card-text">{{ $note->summary }}</p>
+            <p class = "card-text">{!! nl2br(e($note->summary)) !!}</p>
         </div>
     
-        <div class="card text-center border-info  mb-3" style="max-width: 40rem; margin-top: 30px;">
+        <div class="card text-center border-info  mb-3">
             <div class = "card-header">感想</div>
             <p class = "card-text">{{ $note->thoughts }}</p>
         </div>
